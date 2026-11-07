@@ -2,7 +2,7 @@
 
 Produced by `experiments/comparison/run_all.bat` (or `.sh`) from the 540 instance files in
 `data/processed/`: n = 5, 8, 10, 20, 50, 100 × tightness 0.5, 1.0, 1.5 × seeds 1–30.
-Deadline = order time + shelf life (the template's V1; V2 was dropped). Every route was re-scored independently and has late = 0.
+Deadline = order time + shelf life. Every route was re-scored independently and has late = 0.
 
 ## Files
 
