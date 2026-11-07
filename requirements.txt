@@ -1,0 +1,2 @@
+# Chart generation only. Java experiments use no third-party libraries.
+matplotlib==3.10.6

@@ -1,0 +1,18 @@
+{"n": 5, "seed": 17, "tight": 0.5,
+ "restaurant": {"geonameid": "7284944", "name": "Bukit Bintang Plaza", "lat": 3.14750, "lon": 101.70932},
+ "customers": [
+  {"id": 1, "geonameid": "1769633", "name": "Kampong Dollah", "lat": 3.15000, "lon": 101.71667, "order_time": -4.39, "food": "noodles", "shelf_life": 30.0},
+  {"id": 2, "geonameid": "10177074", "name": "Kuala Lumpur Village", "lat": 3.15427, "lon": 101.68486, "order_time": 0.00, "food": "ice_cream", "shelf_life": 15.0},
+  {"id": 3, "geonameid": "1780846", "name": "Batu Empat", "lat": 3.16667, "lon": 101.75000, "order_time": -0.54, "food": "ice_cream", "shelf_life": 15.0},
+  {"id": 4, "geonameid": "11054399", "name": "Bukit Bintang", "lat": 3.14657, "lon": 101.71023, "order_time": -0.92, "food": "noodles", "shelf_life": 30.0},
+  {"id": 5, "geonameid": "13118232", "name": "Kampung Baru", "lat": 3.16544, "lon": 101.70394, "order_time": -0.73, "food": "rice", "shelf_life": 45.0}
+ ],
+ "travel_min": [
+  [0.0000, 2.5863, 8.4544, 14.9829, 0.4337, 6.2470],
+  [2.5863, 0.0000, 10.6906, 12.4164, 2.4311, 6.6713],
+  [8.4544, 10.6906, 0.0000, 22.0874, 8.8320, 7.3669],
+  [14.9829, 12.4164, 22.0874, 0.0000, 14.8468, 15.3469],
+  [0.4337, 2.4311, 8.8320, 14.8468, 0.0000, 6.6342],
+  [6.2470, 6.6713, 7.3669, 15.3469, 6.6342, 0.0000]
+ ]
+}
