@@ -8,7 +8,8 @@ import java.util.Map;
 
 /**
  * Exact best solution for small n (the template uses it for n <= 10).
- * Goal order: most delivered, then lowest total wait (= lowest sum of arrival times).
+ * Goal order: most delivered, then lowest total wait (arrival minus order time).
+ * For a fixed delivered count this also minimises average wait.
  *
  * Depth-first search over on-time routes. Only on-time stops are extended, so every leaf is valid.
  * Two prunings keep it fast and exact:

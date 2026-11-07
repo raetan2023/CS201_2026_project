@@ -1,10 +1,8 @@
 # Data decisions
 
-How we turn `data/raw/MY.txt` into test data, and why. Hanlin's template
-(`docs/Deadline-Aware Food Delivery Problem Template.docx`) is the final set of rules. If this
-file and the template disagree, the template wins.
+How we turn `data/raw/MY.txt` into test data, and why. The current implementation and submitted experiment results use **Java and V1 only**, as described in the root README. The retained DOCX/PDF problem templates are historical design references: their Python commands and requirement to run both V1 and V2 do not describe this implementation.
 
-**Two items are still open: see [Open items](#open-items).**
+The official project brief permits Java and requires two meaningfully different redesigned approaches, not two deadline versions. The team should still confirm the scope change noted under [Open items](#open-items).
 
 ---
 
@@ -40,7 +38,7 @@ file and the template disagree, the template wins.
 | 3 | Which row to keep for duplicate coordinates? | No change to the rule | The row kept is already a `PPL` in all 7 cases. Duplicates share coordinates, so only the name could differ |
 | 4 | Are Kampung Baru and Kampong Baharu the same place? | Keep both | They are 1.4 km apart, and nothing in the data proves they are the same place. Kampong Baharu is also in the template's worked example |
 | 5 | Use the population column? | No | Many of the 33 locations show 0, and nothing in the template needs it |
-| 6 | Keep straight-line travel times? | Yes | Set by the template. They also obey the triangle inequality, which Approach A's "definitely lost" check relies on |
+| 6 | Keep straight-line travel times? | Yes | Set by the template. They also obey the triangle inequality, which Approach B's "definitely lost" check relies on |
 | 7 | Include the `.xlsx` in the submission? | Keep it in the repo, leave it out of the zip | The brief asks for data "in the format used", and nothing reads it |
 
 ### Why hotels are left out
@@ -104,7 +102,7 @@ touch `MY.txt`. This means:
 
 **Name format:** `n8_s1_t1.0.json` means 8 orders, seed 1, tightness 1.0.
 
-**Planned set:** n = 5, 8, 10, 20, 50, 100 × tightness 0.5, 1.0, 1.5 × seeds 1–30 = **540 files,
+**Included set:** n = 5, 8, 10, 20, 50, 100 × tightness 0.5, 1.0, 1.5 × seeds 1–30 = **540 files,
 about 14 MB**, in `data/processed/`. The deadline (order time + shelf life) is worked out
 when scoring. We use the template's V1 only; V2 (60-minute wait cap) was dropped by the group.
 
@@ -134,6 +132,6 @@ The template's worked example can't be regenerated (Java's random numbers differ
 
 ## Repo notes
 
-- `docs/Project_2627T1.pdf` is marked "SMU Classification: Restricted", so it is in `.gitignore`
-  and is not pushed. Get the brief from eLearn.
-- Results and code for each approach live under `experiments/`, as the brief requires.
+- `Project_2627T1.pdf` is at the project root and is already tracked by Git. The old ignore entry for `docs/Project_2627T1.pdf` does not apply to it. The assignment brief is a reference, not a required runtime input; leave it out of the final source/data ZIP.
+- Approach source and explanations live under `experiments/`; shared tooling is in `src/`, and comparison output is in `results/`.
+- The old template's claim that minimising average wait is equivalent to minimising total arrival time holds only for the same delivered customer set. Different delivered subsets can have different sums of order times. The actual scorer correctly uses `arrival - order_time`.

@@ -1,0 +1,18 @@
+{"n": 5, "seed": 23, "tight": 0.5,
+ "restaurant": {"geonameid": "7284944", "name": "Bukit Bintang Plaza", "lat": 3.14750, "lon": 101.70932},
+ "customers": [
+  {"id": 1, "geonameid": "1777077", "name": "Cheras", "lat": 3.10800, "lon": 101.72600, "order_time": -2.12, "food": "rice", "shelf_life": 45.0},
+  {"id": 2, "geonameid": "1768334", "name": "Kampong Datuk Keramat", "lat": 3.16667, "lon": 101.73333, "order_time": -2.73, "food": "noodles", "shelf_life": 30.0},
+  {"id": 3, "geonameid": "9781081", "name": "Setapak Jaya", "lat": 3.18894, "lon": 101.72786, "order_time": -0.61, "food": "noodles", "shelf_life": 30.0},
+  {"id": 4, "geonameid": "7932108", "name": "Taman Cempaka", "lat": 3.13854, "lon": 101.74953, "order_time": 0.00, "food": "noodles", "shelf_life": 30.0},
+  {"id": 5, "geonameid": "1780846", "name": "Batu Empat", "lat": 3.16667, "lon": 101.75000, "order_time": -3.23, "food": "noodles", "shelf_life": 30.0}
+ ],
+ "travel_min": [
+  [0.0000, 14.3000, 10.2396, 15.1403, 13.7227, 14.9829],
+  [14.3000, 0.0000, 19.7231, 27.0075, 12.8537, 21.1411],
+  [10.2396, 19.7231, 0.0000, 7.6491, 10.8245, 5.5524],
+  [15.1403, 27.0075, 7.6491, 0.0000, 18.2965, 10.4675],
+  [13.7227, 12.8537, 10.8245, 18.2965, 0.0000, 9.3850],
+  [14.9829, 21.1411, 5.5524, 10.4675, 9.3850, 0.0000]
+ ]
+}
