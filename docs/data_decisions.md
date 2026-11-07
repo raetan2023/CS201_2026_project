@@ -105,16 +105,18 @@ touch `MY.txt`. This means:
 **Name format:** `n8_s1_t1.0.json` means 8 orders, seed 1, tightness 1.0.
 
 **Planned set:** n = 5, 8, 10, 20, 50, 100 × tightness 0.5, 1.0, 1.5 × seeds 1–30 = **540 files,
-about 16.5 MB (estimated)**, in `data/processed/`. V1 and V2 share the same files, because the
-deadline is worked out when scoring.
+about 14 MB**, in `data/processed/`. The deadline (order time + shelf life) is worked out
+when scoring. We use the template's V1 only; V2 (60-minute wait cap) was dropped by the group.
 
-**Not generated yet.** This is waiting on open item 1.
+**Generated** with the shared Java tools in `src/com/delivery/tools/` (`GenerateInstance`): 540 files, about 14 MB. Randomness comes from `java.util.Random`, seeded from (n, seed); the tightness only scales the shelf lives, so the three tightness files for one (n, seed) share customers, order times and food. How to regenerate and run: `experiments/comparison/README.md`.
+
+The template's worked example can't be regenerated (Java's random numbers differ from Python's), so it is rebuilt from the template's table and kept as `data/processed/example_n6_s10.json`. `CheckWorkedExample` confirms the Java scorer and brute force reproduce the template: best route 1→2→5→4→6→3 (average 29.0, longest 62.7), nearest neighbour cancels Kuala Lumpur Village (21.9). Travel times match to 0.1 min except Kampong Baharu (6.85 min, shown as 6.9 in the template).
 
 ---
 
 ## Open items
 
-1. **Confirm with Hanlin that generating and scoring can be in Java.** We recall Hanlin saying
+1. **Done (pending Hanlin's confirmation): generating and scoring are in Java** (`src/com/delivery/tools/`, checked against the template's worked example). Original question: **Confirm with Hanlin that generating and scoring can be in Java.** We recall Hanlin saying
    our tests can be in Java, but the template still says every method must use
    `generate_instance.py` and `evaluate.py`, which are Python. Those files are not in this repo.
    The brief requires "ALL source codes required to reproduce the experiments", so the
@@ -125,7 +127,7 @@ deadline is worked out when scoring.
      the template's. The template's worked example won't regenerate, and needs keeping as a
      fixed file.
    - Check the Java scorer against the template's worked example: for n = 6, seed 10, the best
-     V1 route has average wait 29.0 and the best V2 route 29.8.
+     route has average wait 29.0 (done: `CheckWorkedExample`).
 2. **Pick a teammate to check this file** before it is used in the presentation.
 
 ---
