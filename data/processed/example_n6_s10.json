@@ -1,0 +1,20 @@
+{"n": 6, "seed": 10, "tight": 1.0,
+ "restaurant": {"geonameid": "7284944", "name": "Bukit Bintang Plaza", "lat": 3.14750, "lon": 101.70932},
+ "customers": [
+  {"id": 1, "geonameid": "11054400", "name": "Golden Triangle", "lat": 3.15526, "lon": 101.71063, "order_time": -3.50, "food": "ice_cream", "shelf_life": 30.0},
+  {"id": 2, "geonameid": "1771357", "name": "Kampong Baharu", "lat": 3.16667, "lon": 101.71667, "order_time": -3.20, "food": "ice_cream", "shelf_life": 30.0},
+  {"id": 3, "geonameid": "1744763", "name": "Sentul", "lat": 3.18333, "lon": 101.68333, "order_time": -5.30, "food": "rice", "shelf_life": 90.0},
+  {"id": 4, "geonameid": "1749805", "name": "Pudu", "lat": 3.13333, "lon": 101.71667, "order_time": 0.00, "food": "noodles", "shelf_life": 60.0},
+  {"id": 5, "geonameid": "10177074", "name": "Kuala Lumpur Village", "lat": 3.15427, "lon": 101.68486, "order_time": -7.80, "food": "ice_cream", "shelf_life": 30.0},
+  {"id": 6, "geonameid": "11054412", "name": "Taman Maluri", "lat": 3.13330, "lon": 101.72855, "order_time": -3.20, "food": "noodles", "shelf_life": 60.0}
+ ],
+ "travel_min": [
+  [0.0000, 2.6251, 6.8474, 14.7579, 5.3233, 8.4544, 7.9665],
+  [2.6251, 0.0000, 4.3052, 13.0522, 7.5871, 8.5898, 9.4494],
+  [6.8474, 4.3052, 0.0000, 12.4177, 11.1217, 11.3740, 11.8141],
+  [14.7579, 13.0522, 12.4177, 0.0000, 20.0378, 9.7074, 22.4808],
+  [5.3233, 7.5871, 11.1217, 20.0378, 0.0000, 12.6908, 3.9571],
+  [8.4544, 8.5898, 11.3740, 9.7074, 12.6908, 0.0000, 16.1464],
+  [7.9665, 9.4494, 11.8141, 22.4808, 3.9571, 16.1464, 0.0000]
+ ]
+}
