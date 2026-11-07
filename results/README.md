@@ -18,7 +18,7 @@ Deadline = order time + shelf life (the template's V1; V2 was dropped). Every ro
 
 | Column | Meaning |
 |---|---|
-| `method` | `NN` nearest neighbour · `A_plan_fix` Approach A (code `SolverB`) · `B_greedy` Approach B (code `SolverA`) · `BRUTE` exact best |
+| `method` | `NN` nearest neighbour · `A_plan_fix` Approach A (code `SolverA`) · `B_greedy` Approach B (code `SolverB`) · `BRUTE` exact best |
 | `delivered`, `cancelled`, `late` | Counts; `late` is always 0 |
 | `avg_wait`, `longest_wait` | Minutes, over delivered customers (wait = arrival − order time) |
 | `runtime_ms` | Median wall time of repeated runs (1–20 depending on n) |
@@ -46,3 +46,7 @@ Notes for reading the numbers:
 - Above n = 33 locations repeat (customers 0 min apart) and one rider must drop most orders, so
   n = 50 and 100 mostly test speed and how each method behaves when most orders are lost.
 - Run times below about 0.01 ms are at the timer's resolution; compare them only roughly.
+
+## Benchmark provenance
+
+The checked-in timing values are the original benchmark capture used by `slides.pptx`. They are hardware-dependent. The final audit changed cancellation-list construction in `SolverA` from sorting to a linear scan, preserving its outputs and the documented O(n³) per-pass bound. Re-running the scripts measures the current revision and replaces CSVs/charts; update the slide timing claims if you use that new capture.

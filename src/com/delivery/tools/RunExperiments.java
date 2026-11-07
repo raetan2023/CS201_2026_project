@@ -2,8 +2,8 @@ package com.delivery.tools;
 
 import com.delivery.routing.DeliveryInstance;
 import com.delivery.routing.RouteResult;
-import com.delivery.routing.SolverA;
 import com.delivery.routing.SolverB;
+import com.delivery.routing.SolverA;
 
 import java.io.PrintWriter;
 import java.nio.file.Files;
@@ -23,8 +23,8 @@ import java.util.function.Function;
  *
  * Methods (names as in the presentation):
  *   NN          nearest neighbour baseline (NearestNeighbor.java)
- *   A_plan_fix  Approach A: deadline order, then improve by moving stops   (code: SolverB, experiments/approach_B)
- *   B_greedy    Approach B: greedy with one-step lookahead                 (code: SolverA, experiments/approach_A)
+ *   A_plan_fix  Approach A: deadline order, then improve by moving stops   (code: SolverA, experiments/approach_A)
+ *   B_greedy    Approach B: greedy with one-step lookahead                 (code: SolverB, experiments/approach_B)
  *   BRUTE       exact best, n <= 10 only (BruteForce.java)
  *
  * Every route is re-scored with Evaluate.java (not trusted from the solver) and must have late = 0.
@@ -43,8 +43,8 @@ public final class RunExperiments {
 
     static final List<Method> METHODS = List.of(
             new Method("NN", NearestNeighbor::solve),
-            new Method("A_plan_fix", in -> fromSolver(new SolverB().solve(in.toSolverInstance()))),
-            new Method("B_greedy", in -> fromSolver(new SolverA().solve(in.toSolverInstance()))),
+            new Method("A_plan_fix", in -> fromSolver(new SolverA().solve(in.toSolverInstance()))),
+            new Method("B_greedy", in -> fromSolver(new SolverB().solve(in.toSolverInstance()))),
             new Method("BRUTE", BruteForce::solve));
 
     record Row(int n, double tight, int seed, String method, Evaluate.Score s, double ms,

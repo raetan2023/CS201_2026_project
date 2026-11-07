@@ -1,0 +1,18 @@
+{"n": 5, "seed": 24, "tight": 1.5,
+ "restaurant": {"geonameid": "7284944", "name": "Bukit Bintang Plaza", "lat": 3.14750, "lon": 101.70932},
+ "customers": [
+  {"id": 1, "geonameid": "1752255", "name": "Pantai Valley", "lat": 3.11667, "lon": 101.66667, "order_time": -8.37, "food": "noodles", "shelf_life": 90.0},
+  {"id": 2, "geonameid": "11054399", "name": "Bukit Bintang", "lat": 3.14657, "lon": 101.71023, "order_time": -8.37, "food": "noodles", "shelf_life": 90.0},
+  {"id": 3, "geonameid": "11054404", "name": "Chow Kit", "lat": 3.16236, "lon": 101.69567, "order_time": 0.00, "food": "noodles", "shelf_life": 90.0},
+  {"id": 4, "geonameid": "13118233", "name": "Titiwangsa", "lat": 3.17822, "lon": 101.70312, "order_time": -9.19, "food": "noodles", "shelf_life": 90.0},
+  {"id": 5, "geonameid": "1766272", "name": "Kampong Pandan Quarters", "lat": 3.13333, "lon": 101.73333, "order_time": -9.92, "food": "ice_cream", "shelf_life": 45.0}
+ ],
+ "travel_min": [
+  [0.0000, 17.5381, 0.4337, 6.7263, 10.4537, 9.2898],
+  [17.5381, 0.0000, 17.6069, 18.0446, 23.8531, 22.8886],
+  [0.4337, 17.6069, 0.0000, 7.1598, 10.8203, 8.8718],
+  [6.7263, 18.0446, 7.1598, 0.0000, 5.8437, 15.8470],
+  [10.4537, 23.8531, 10.8203, 5.8437, 0.0000, 18.0413],
+  [9.2898, 22.8886, 8.8718, 15.8470, 18.0413, 0.0000]
+ ]
+}

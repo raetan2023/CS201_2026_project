@@ -6,10 +6,7 @@ cd "$(dirname "$0")/../.."
 
 echo "[1/5] Compiling (Java 17+)..."
 rm -rf out
-javac -encoding UTF-8 -d out \
-  experiments/approach_A/src/com/delivery/routing/{Customer,DeliveryInstance,RouteResult,SolverA}.java \
-  experiments/approach_B/src/com/delivery/routing/SolverB.java \
-  src/com/delivery/tools/*.java
+javac -encoding UTF-8 -d out src/com/delivery/routing/*.java experiments/approach_A/src/com/delivery/routing/*.java experiments/approach_B/src/com/delivery/routing/*.java src/com/delivery/tools/*.java
 
 echo "[2/5] Checking the shared tools against the template's worked example..."
 java -cp out com.delivery.tools.CheckWorkedExample data/raw/MY.txt
@@ -21,5 +18,5 @@ echo "[4/5] Running NN, Approach A, Approach B and brute force (about 2-5 minute
 java -cp out com.delivery.tools.RunExperiments
 
 echo "[5/5] Drawing charts (needs Python with matplotlib)..."
-python3 experiments/comparison/plot_results.py || echo "  skipped: install matplotlib to draw the charts"
+python3 experiments/comparison/plot_results.py
 echo "Done. See results/summary.csv and results/fig_*.png"

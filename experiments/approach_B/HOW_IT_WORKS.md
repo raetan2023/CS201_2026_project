@@ -1,11 +1,11 @@
-# How Approach A works
+# How Approach B works
 
-Approach A is a **greedy route builder with a one-step lookahead**. One rider leaves the
+Approach B is a **greedy route builder with a one-step lookahead**. One rider leaves the
 restaurant with every order on board and picks the next customer one stop at a time. At each
 stop it asks: *"If I go here next, how many other orders do I doom?"* It never reconsiders a
 stop once it has been chosen.
 
-All code lives in `src/com/delivery/routing/`. See `README.md` for compile/run commands.
+The solver and demo live in this approach's `src/com/delivery/routing/` directory. Shared model classes live in the project-root `src/com/delivery/routing/`. See `README.md` for compile/run commands.
 
 ---
 
@@ -35,8 +35,8 @@ All code lives in `src/com/delivery/routing/`. See `README.md` for compile/run c
 | `Customer.java` | A record `(id, orderTime, shelfLife, foodType)` with `deadline()` |
 | `DeliveryInstance.java` | The travel matrix plus the customer list (one problem instance) |
 | `RouteResult.java` | The output: `route`, `arrivals`, `dropped`, `meanWait` |
-| `SolverA.java` | The algorithm |
-| `Demo.java` | Hand-worked sanity checks and a nearest-neighbour baseline |
+| `SolverB.java` | The algorithm |
+| `DemoB.java` | Hand-worked sanity checks and a nearest-neighbour baseline |
 
 **Indexing convention.** The travel matrix is `(n+1) × (n+1)`:
 
@@ -58,8 +58,7 @@ The `DeliveryInstance` constructor rejects a matrix with the wrong number of row
 | `route`, `arrivals` | `List` | The delivered stops so far, in order |
 
 **Why no priority queue?** Every candidate's score (lost count, travel time, slack) depends on
-where the rider is now, so every key changes after every move. A heap would need an
-O(n log n) rebuild at each step. That is more work than the O(n) linear scan.
+where the rider is now, so every key changes after every move. Recomputing all lost counts already costs O(n²) per step. Bottom-up heap construction is O(n), but a heap cannot reuse the old scores and offers no advantage over a linear scan when only one winner is needed.
 
 ---
 
@@ -97,7 +96,7 @@ after `u`. So the check is **one-sided**:
 ## 4. Pseudocode
 
 ```
-SolverA(instance):
+SolverB(instance):
     visited ← all false
     cur ← RESTAURANT ; t ← 0
     route, arrivals ← []
@@ -123,7 +122,7 @@ SolverA(instance):
 
 ---
 
-## 5. Worked examples (these are the checks in `Demo.java`)
+## 5. Worked examples (these are the checks in `DemoB.java`)
 
 All three examples put customers on a line, with the restaurant at position 0.
 Travel time = distance, all orders are placed at `t = 0`, and so `deadline = shelfLife`.
@@ -168,7 +167,7 @@ Nearest neighbour goes B → C → A and reaches A at 35. A's ice cream spoils, 
 | Q | 1 | −5 | 16 |
 | R (rice) | 2 | −1 | 90 |
 
-The best route is **P → Q → R**: P at 5, Q at 15 ≤ 16, R at 19. All 3 are on time.
+A feasible route is **P → Q → R**: P at 5, Q at 15 ≤ 16, R at 19. All 3 are on time. The better route **P → R → Q** arrives at 5, 11 and 15, with mean wait 10.33; it is found by Approach A.
 
 **Step 1** (at the restaurant, t = 0).
 
@@ -188,14 +187,14 @@ Going to P loses Q, and going to Q loses P. They tie on rule ②, and Q is neare
 **Step 3** (at Q, t = 5). P would arrive at 15 > 10, so nothing is alive. The loop stops.
 
 **Result:** R → Q, with P **dropped**. 2 of 3 delivered, where 3 were possible.
-This is exactly the case the one-step lookahead cannot see. It is the motivation for Approach B.
+This is exactly the case the one-step lookahead cannot see. It is the motivation for Approach A.
 
 ### Example 3: loose deadlines reduce to nearest neighbour
 
 Positions +3, −2, +7, −6, +1, and every deadline is 999. No candidate ever loses anyone, so
 rule ② always ties at 0 and rule ③ (nearest first) decides every step.
-SolverA produces exactly the nearest-neighbour route: **4 → 0 → 2 → 1 → 3**.
-This shows Approach A is a strict extension of the baseline. It only changes NN's choice when
+SolverB produces exactly the nearest-neighbour route: **4 → 0 → 2 → 1 → 3**.
+This shows Approach B is a strict extension of the baseline. It only changes NN's choice when
 a deadline is at risk.
 
 ---
@@ -212,7 +211,7 @@ doesn't change the bound.
 |---|---|
 | Never makes a move that a direct check shows will doom someone, if a safer move exists | Checks each remaining order **on its own**, so it can't see that two orders are each reachable but not **both** (Example 2) |
 | Same as nearest neighbour when deadlines are loose (Example 3) | Greedy: never backtracks or revises an earlier stop |
-| Deterministic: the same input always gives the same route | Ignores `orderTime` when choosing; it only uses it to measure wait |
+| Deterministic: the same input always gives the same route | Uses `orderTime` through deadlines and slack, but does not directly minimise total wait when choosing a stop |
 | Simple arrays, no tuning weights | Drops undeliverable orders instead of delivering them late |
 | | Static: no orders can arrive mid-route |
 
@@ -220,7 +219,7 @@ doesn't change the bound.
 
 ## 7. How the code fits the group template
 
-The final rules are in `docs/Deadline-Aware Food Delivery Problem Template.docx`.
+The original design template is `docs/Deadline-Aware Food Delivery Problem Template.docx`. The root README and data decisions describe the current Java/V1 scope.
 The data rules are in `docs/data_decisions.md`.
 
 | Template rule | Current code |

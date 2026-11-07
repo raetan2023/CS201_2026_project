@@ -1,0 +1,18 @@
+{"n": 5, "seed": 20, "tight": 1.0,
+ "restaurant": {"geonameid": "7284944", "name": "Bukit Bintang Plaza", "lat": 3.14750, "lon": 101.70932},
+ "customers": [
+  {"id": 1, "geonameid": "13118381", "name": "Taman Desa", "lat": 3.10591, "lon": 101.68683, "order_time": -8.12, "food": "ice_cream", "shelf_life": 30.0},
+  {"id": 2, "geonameid": "13118278", "name": "Brickfields", "lat": 3.12966, "lon": 101.68424, "order_time": -5.06, "food": "rice", "shelf_life": 90.0},
+  {"id": 3, "geonameid": "1747013", "name": "Salak Selatan", "lat": 3.10600, "lon": 101.70500, "order_time": -9.51, "food": "rice", "shelf_life": 90.0},
+  {"id": 4, "geonameid": "1769633", "name": "Kampong Dollah", "lat": 3.15000, "lon": 101.71667, "order_time": 0.00, "food": "noodles", "shelf_life": 60.0},
+  {"id": 5, "geonameid": "12750573", "name": "Taman Ikan Emas", "lat": 3.11619, "lon": 101.72020, "order_time": -5.82, "food": "ice_cream", "shelf_life": 30.0}
+ ],
+ "travel_min": [
+  [0.0000, 15.7670, 10.2568, 13.9184, 2.5863, 11.0554],
+  [15.7670, 0.0000, 7.9695, 6.0524, 17.7513, 11.6323],
+  [10.2568, 7.9695, 0.0000, 10.4933, 12.7561, 12.7930],
+  [13.9184, 6.0524, 10.4933, 0.0000, 15.1837, 6.0983],
+  [2.5863, 17.7513, 12.7561, 15.1837, 0.0000, 11.3396],
+  [11.0554, 11.6323, 12.7930, 6.0983, 11.3396, 0.0000]
+ ]
+}

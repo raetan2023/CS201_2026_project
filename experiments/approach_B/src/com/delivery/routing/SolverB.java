@@ -1,123 +1,139 @@
 package com.delivery.routing;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 /**
- * Approach B: deadline order first, then improve it by moving one stop at a time.
+ * Approach B: greedy construction with lookahead guards.
  *
- * Unlike Approach A, B does not pick stops one by one. It always holds a
- * complete plan: a list of ALL customers in the order the rider will try
- * them. A plan is scored by simply driving it ("walk"):
+ * At each step the rider chooses the next customer by comparing candidates
+ * with rules in strict order (no weights):
  *
- *   go through the plan in order; if the rider can reach the next customer
- *   by its deadline, drive there and deliver; otherwise cancel that order
- *   and stay put.
+ *   ① Feasibility filter : skip u if the rider cannot reach u by deadline(u).
+ *   ② Fewest lost        : minimise the number of currently-alive orders that
+ *                          become unreachable if the rider goes to u next.
+ *                          (serves objective 1: maximise on-time deliveries)
+ *   ③ Shortest travel    : among ties, go to the nearest.
+ *                          (serves objective 2: minimise mean wait)
+ *   ④ Least slack        : among remaining ties, the more urgent order.
+ *   ⑤ Lowest id          : final deterministic tie-break.
  *
- * Step 1 (start plan) : sort customers by deadline, most urgent first
- *                       (Earliest Deadline First). Ties: lower id first.
- * Step 2 (improve)    : try every "move" (take one customer out of the plan
- *                       and put it back at another position). Keep the
- *                       single best move if it makes the plan better.
- *                       Repeat until no move helps.
+ * "Alive" = unvisited and still reachable on time directly from the rider's
+ * current position.
  *
- * "Better" compares the two goals in strict order (no weights):
- *   (1) more orders delivered, then (2) lower mean wait.
+ * Known limitation (by design, motivates Approach A): the lookahead checks
+ * each remaining order independently, so it can report "0 lost" when two
+ * orders are individually reachable but not jointly reachable.
  *
- * Main data structure: the plan, a plain List of customer ids (a permutation).
- * Cancelled customers stay in the plan, so a later move can bring them back.
- *
- * Known limitation (by design): Step 2 only ever changes ONE stop at a time
- * (a local search). If fixing the plan needs two stops moved together, and
- * each move alone makes nothing better, B stops early (see Demo, Example 5).
- *
- * Complexity: one pass tries n(n-1) moves, and each move costs O(n) to copy
- * and walk the plan, so one pass is O(n^3). The number of passes depends on
- * the instance (each pass must strictly improve the plan, so it always
- * terminates). Space: O(n) for the plan on top of the travel matrix.
+ * Complexity: n steps x O(n) candidates x O(n) lookahead = O(n^3) time, O(n) space.
+ * No priority queue: every candidate's key changes after each move, so a heap
+ * cannot reuse its keys after moving. Computing all lost counts costs O(n^2)
+ * per step; a linear scan then selects one winner without maintaining a heap.
  */
 public class SolverB {
 
     private static final double EPS = 1e-9;
 
     public RouteResult solve(DeliveryInstance inst) {
-        // Step 1: Earliest Deadline First.
-        List<Integer> plan = deadlineOrder(inst);
-        RouteResult best = walk(inst, plan);
+        int n = inst.size();
+        boolean[] visited = new boolean[n];
+        List<Integer> route = new ArrayList<>();
+        List<Double> arrivals = new ArrayList<>();
 
-        // Step 2: best single move, repeated until nothing improves.
+        int currentNode = DeliveryInstance.DEPOT;
+        double t = 0.0;
+
         while (true) {
-            List<Integer> bestPlan = null;
-            int n = plan.size();
-            for (int from = 0; from < n; from++) {
-                for (int to = 0; to < n; to++) {
-                    if (from == to) continue;
-                    List<Integer> candidate = move(plan, from, to);
-                    RouteResult result = walk(inst, candidate);
-                    if (isBetter(result, best)) {
-                        best = result;
-                        bestPlan = candidate;
-                    }
+            // Orders still deliverable from where the rider stands now.
+            boolean[] alive = aliveFrom(inst, visited, currentNode, t);
+
+            int best = -1;
+            int bestLost = Integer.MAX_VALUE;
+            double bestTravel = Double.MAX_VALUE;
+            double bestSlack = Double.MAX_VALUE;
+
+            for (int u = 0; u < n; u++) {
+                if (!alive[u]) continue;                               // ① filter
+
+                Customer cu = inst.customers().get(u);
+                double travel = inst.travel(currentNode, DeliveryInstance.node(u));
+                double arrival = t + travel;
+                double slack = cu.deadline() - arrival;
+
+                int lost = countLost(inst, alive, u, arrival);          // ② lookahead
+
+                if (isBetter(lost, travel, slack, u,                    // ③ ④ ⑤
+                             bestLost, bestTravel, bestSlack, best)) {
+                    best = u;
+                    bestLost = lost;
+                    bestTravel = travel;
+                    bestSlack = slack;
                 }
             }
-            if (bestPlan == null) break;      // local optimum: no move helps
-            plan = bestPlan;
+
+            if (best == -1) break;                                     // nothing reachable
+
+            t += bestTravel;
+            visited[best] = true;
+            route.add(best);
+            arrivals.add(t);
+            currentNode = DeliveryInstance.node(best);
         }
-        return best;
+
+        return buildResult(inst, visited, route, arrivals);
     }
 
-    /** All customer ids, most urgent deadline first; ties broken by lower id. */
-    static List<Integer> deadlineOrder(DeliveryInstance inst) {
-        List<Integer> plan = new ArrayList<>();
-        for (Customer c : inst.customers()) plan.add(c.id());
-        plan.sort(Comparator.comparingDouble((Integer id) -> inst.customers().get(id).deadline())
-                            .thenComparingInt(id -> id));
-        return plan;
+    /** Lexicographic comparison: lost, then travel, then slack, then id. */
+    private static boolean isBetter(int lost, double travel, double slack, int id,
+                                    int bLost, double bTravel, double bSlack, int bId) {
+        if (bId == -1) return true;
+        if (lost != bLost) return lost < bLost;
+        if (Math.abs(travel - bTravel) > EPS) return travel < bTravel;
+        if (Math.abs(slack - bSlack) > EPS) return slack < bSlack;
+        return id < bId;
     }
 
-    /** A copy of the plan with the customer at position {@code from} moved to position {@code to}. */
-    static List<Integer> move(List<Integer> plan, int from, int to) {
-        List<Integer> copy = new ArrayList<>(plan);
-        int id = copy.remove(from);
-        copy.add(to, id);
-        return copy;
+    /** alive[v] = v unvisited and reachable on time directly from (node, t). */
+    private static boolean[] aliveFrom(DeliveryInstance inst, boolean[] visited,
+                                       int node, double t) {
+        int n = inst.size();
+        boolean[] alive = new boolean[n];
+        for (int v = 0; v < n; v++) {
+            if (visited[v]) continue;
+            double arr = t + inst.travel(node, DeliveryInstance.node(v));
+            alive[v] = arr <= inst.customers().get(v).deadline() + EPS;
+        }
+        return alive;
     }
 
     /**
-     * Drives the plan: deliver each customer if the rider arrives by its
-     * deadline, otherwise cancel it (the rider does not move).
+     * Number of alive orders (other than u) that would no longer be reachable
+     * on time if the rider goes to u first and arrives at {@code arrivalAtU}.
+     * Each order is checked independently (1-step, optimistic lookahead).
      */
-    static RouteResult walk(DeliveryInstance inst, List<Integer> plan) {
-        List<Integer> route = new ArrayList<>();
-        List<Double> arrivals = new ArrayList<>();
-        List<Integer> dropped = new ArrayList<>();
-        int currentNode = DeliveryInstance.DEPOT;
-        double t = 0.0;
-        double totalWait = 0.0;
-
-        for (int id : plan) {
-            Customer c = inst.customers().get(id);
-            int node = DeliveryInstance.node(id);
-            double arrival = t + inst.travel(currentNode, node);
-            if (arrival <= c.deadline() + EPS) {
-                t = arrival;
-                currentNode = node;
-                route.add(id);
-                arrivals.add(t);
-                totalWait += t - c.orderTime();
-            } else {
-                dropped.add(id);
-            }
+    private static int countLost(DeliveryInstance inst, boolean[] alive,
+                                 int u, double arrivalAtU) {
+        int lost = 0;
+        int uNode = DeliveryInstance.node(u);
+        for (int v = 0; v < inst.size(); v++) {
+            if (!alive[v] || v == u) continue;
+            double arr = arrivalAtU + inst.travel(uNode, DeliveryInstance.node(v));
+            if (arr > inst.customers().get(v).deadline() + EPS) lost++;
         }
-        dropped.sort(null);
-        double meanWait = route.isEmpty() ? 0.0 : totalWait / route.size();
-        return new RouteResult(route, arrivals, dropped, meanWait);
+        return lost;
     }
 
-    /** Goal order: more delivered first; mean wait only breaks ties. */
-    static boolean isBetter(RouteResult a, RouteResult b) {
-        if (a.delivered() != b.delivered()) return a.delivered() > b.delivered();
-        return a.meanWait() < b.meanWait() - EPS;
+    private static RouteResult buildResult(DeliveryInstance inst, boolean[] visited,
+                                           List<Integer> route, List<Double> arrivals) {
+        List<Integer> dropped = new ArrayList<>();
+        for (int v = 0; v < inst.size(); v++) {
+            if (!visited[v]) dropped.add(v);
+        }
+        double totalWait = 0.0;
+        for (int k = 0; k < route.size(); k++) {
+            totalWait += arrivals.get(k) - inst.customers().get(route.get(k)).orderTime();
+        }
+        double meanWait = route.isEmpty() ? 0.0 : totalWait / route.size();
+        return new RouteResult(route, arrivals, dropped, meanWait);
     }
 }

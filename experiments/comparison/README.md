@@ -10,8 +10,8 @@ Everything here is Java 17+, no extra libraries. The charts need Python 3 with m
 
 | In the presentation | Code | Folder |
 |---|---|---|
-| Approach A: deadline order, then improve by moving stops | `SolverB.java` | `experiments/approach_B/` |
-| Approach B: greedy with one-step lookahead | `SolverA.java` | `experiments/approach_A/` |
+| Approach A: deadline order, then improve by moving stops | `SolverA.java` | `experiments/approach_A/` |
+| Approach B: greedy with one-step lookahead | `SolverB.java` | `experiments/approach_B/` |
 | Nearest neighbour baseline | `NearestNeighbor.java` | `src/com/delivery/tools/` |
 | Exact best (n ≤ 10) | `BruteForce.java` | `src/com/delivery/tools/` |
 
@@ -21,10 +21,10 @@ In `results/*.csv` the methods are `A_plan_fix`, `B_greedy`, `NN` and `BRUTE`.
 
 From the project folder:
 
-    experiments\comparison\run_all.bat          (Windows Command Prompt)
-    bash experiments/comparison/run_all.sh      (macOS / Linux / Git Bash)
+    .\run_tests.bat --all             (Windows PowerShell / Command Prompt)
+    bash run_tests.sh --all           (macOS / Linux / Git Bash)
 
-It does the five steps below and takes 2 to 5 minutes. Instance generation is deterministic,
+It runs both demos and the presentation-example checks, then the five steps below and takes several minutes. Instance generation is deterministic,
 so you get exactly the same 540 files and the same cancelled counts and waits as the committed
 results (run times will differ by machine).
 
@@ -32,11 +32,9 @@ results (run times will differ by machine).
 
 **1. Compile** the two solvers and the shared tools into `out/` (ignored by git):
 
-    javac -encoding UTF-8 -d out experiments/approach_A/src/com/delivery/routing/Customer.java experiments/approach_A/src/com/delivery/routing/DeliveryInstance.java experiments/approach_A/src/com/delivery/routing/RouteResult.java experiments/approach_A/src/com/delivery/routing/SolverA.java experiments/approach_B/src/com/delivery/routing/SolverB.java src/com/delivery/tools/*.java
+    javac -encoding UTF-8 -d out src/com/delivery/routing/*.java experiments/approach_A/src/com/delivery/routing/*.java experiments/approach_B/src/com/delivery/routing/*.java src/com/delivery/tools/*.java
 
-Only one copy of `Customer`, `DeliveryInstance` and `RouteResult` is compiled (the two
-approach folders have identical copies), and the two `Demo.java` files are left out because
-they share a class name.
+`Customer`, `DeliveryInstance` and `RouteResult` are shared in `src/com/delivery/routing/`. Each approach contains its own solver and a uniquely named demo (`DemoA` or `DemoB`).
 
 **2. Check the shared tools** against the template's worked example (n = 6, seed 10):
 
@@ -61,7 +59,7 @@ For every instance it runs NN, Approach A, Approach B and (n ≤ 10) brute
 force; re-scores every route with `Evaluate.java`; stops with an error if any route has a late
 order; and writes `results/raw_results.csv` and `results/summary.csv`.
 
-**5. Draw the charts:**
+**5. Draw the charts** (install `requirements.txt` first; use `python3` on macOS/Linux):
 
     python experiments/comparison/plot_results.py
 

@@ -1,0 +1,24 @@
+{"n": 8, "seed": 10, "tight": 1.0,
+ "restaurant": {"geonameid": "7284944", "name": "Bukit Bintang Plaza", "lat": 3.14750, "lon": 101.70932},
+ "customers": [
+  {"id": 1, "geonameid": "1766273", "name": "Kampong Pandan Dalam", "lat": 3.15000, "lon": 101.73333, "order_time": -5.33, "food": "noodles", "shelf_life": 60.0},
+  {"id": 2, "geonameid": "11054407", "name": "Istana Negara", "lat": 3.13251, "lon": 101.69584, "order_time": -6.05, "food": "ice_cream", "shelf_life": 30.0},
+  {"id": 3, "geonameid": "7932108", "name": "Taman Cempaka", "lat": 3.13854, "lon": 101.74953, "order_time": -7.40, "food": "ice_cream", "shelf_life": 30.0},
+  {"id": 4, "geonameid": "12750573", "name": "Taman Ikan Emas", "lat": 3.11619, "lon": 101.72020, "order_time": -7.63, "food": "ice_cream", "shelf_life": 30.0},
+  {"id": 5, "geonameid": "1771357", "name": "Kampong Baharu", "lat": 3.16667, "lon": 101.71667, "order_time": -1.71, "food": "noodles", "shelf_life": 60.0},
+  {"id": 6, "geonameid": "1766272", "name": "Kampong Pandan Quarters", "lat": 3.13333, "lon": 101.73333, "order_time": -3.23, "food": "noodles", "shelf_life": 60.0},
+  {"id": 7, "geonameid": "1777077", "name": "Cheras", "lat": 3.10800, "lon": 101.72600, "order_time": 0.00, "food": "ice_cream", "shelf_life": 30.0},
+  {"id": 8, "geonameid": "1769633", "name": "Kampong Dollah", "lat": 3.15000, "lon": 101.71667, "order_time": -0.06, "food": "rice", "shelf_life": 90.0}
+ ],
+ "travel_min": [
+  [0.0000, 8.0406, 6.7204, 13.7227, 11.0554, 6.8474, 9.2898, 14.3000, 2.5863],
+  [8.0406, 0.0000, 13.7831, 6.6129, 12.0968, 7.8559, 5.5609, 14.2217, 5.5491],
+  [6.7204, 13.7831, 0.0000, 17.9961, 9.7712, 13.3412, 12.4904, 12.9527, 9.0652],
+  [13.7227, 6.6129, 17.9961, 0.0000, 12.2894, 14.4169, 5.6690, 12.8537, 11.5935],
+  [11.0554, 12.0968, 9.7712, 12.2894, 0.0000, 16.8804, 7.1985, 3.3461, 11.3396],
+  [6.8474, 7.8559, 13.3412, 14.4169, 16.8804, 0.0000, 12.4292, 19.8166, 5.5609],
+  [9.2898, 5.5609, 12.4904, 5.6690, 7.1985, 12.4292, 0.0000, 8.7954, 7.8560],
+  [14.3000, 14.2217, 12.9527, 12.8537, 3.3461, 19.8166, 8.7954, 0.0000, 14.3511],
+  [2.5863, 5.5491, 9.0652, 11.5935, 11.3396, 5.5609, 7.8560, 14.3511, 0.0000]
+ ]
+}
