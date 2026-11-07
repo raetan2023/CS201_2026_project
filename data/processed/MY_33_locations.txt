@@ -1,0 +1,33 @@
+1735161	Kuala Lumpur	Kuala Lumpur	Federal Territory of Kuala Lumpur,Gizlungzpoh,KL,KUL,Kouala Loumpou,Kouala Loumpour,Kuala Lumpor,Kuala Lumpur,Kuala-Lumpur,Kuala-Lumpuro,Kualae-Lumpur,Kualalumpura,Kualalumpūra,Kvala Lumpuras,Kvala Lumpūras,Kúala Lúmpúr,Wilayah Persekutuan Kuala Lumpur,ji long po,kaulalampur,kawlalampexr,kolalampur,ku'a lalampura,ku'ala lupura,ku'alalampura,ku'alalumpura,kuallalumpuleu,kuararunpuru,kuyalalamapura,kvalalampura,kwala lambwr,kwala lmpwr,kwalalampwr,kwalalmbwr,kwalalmpwr,kwalalwmpwr,kۇyalalۇmpۇr,Κουάλα Λουμπούρ,Куалæ-Лумпур,Куала Лумпур,Куала-Лумпур,Կուալա Լումպուր,קואלה לומפור,كوالا لامبور,كوالالمبور,كۇئالالۇمپۇر,کوالا لمپور,کوالالامپور,کوالالمپور,کوالالومپور,कुआ लालम्पुर,कुआलालम्पुर,क्वालालंपूर,কুয়ালালামপুর,ਕੁਆਲਾ ਲੁੰਪੁਰ,କୁଆଲାଲୁମ୍ପୁର,கோலாலம்பூர்,ಕೌಲಾಲಂಪುರ್,കോലാലമ്പൂർ,กัวลาลัมเปอร์,ཁལ་ལུང་ཕུ།,ကွာလာလမ်ပူမြို့,კუალა-ლუმპური,ኩዋላ ሉምፑር,クアラルンプール,吉隆坡,쿠알라룸푸르	3.1412	101.68653	P	PPLC	MY		14	0401			1453975		56	Asia/Kuala_Lumpur	2026-04-29
+1744508	Seputeh	Seputeh		3.11667	101.68333	P	PPL	MY		14	0401			18605		57	Asia/Kuala_Lumpur	2024-04-21
+1744763	Sentul	Sentul		3.18333	101.68333	P	PPL	MY		14	0401			100000		41	Asia/Kuala_Lumpur	2024-10-24
+1747013	Salak Selatan	Salak Selatan	Salak Selatan,Salak South	3.106	101.705	P	PPL	MY		14	0401			0		33	Asia/Kuala_Lumpur	2021-04-17
+1749799	Pudu Ulu	Pudu Ulu		3.11667	101.73333	P	PPL	MY		14	0401			0		64	Asia/Kuala_Lumpur	2021-04-17
+1749805	Pudu	Pudu	Pudoh,Pudu	3.13333	101.71667	P	PPL	MY		14	0401			15000		54	Asia/Kuala_Lumpur	2024-10-24
+1752255	Pantai Valley	Pantai Valley		3.11667	101.66667	P	PPL	MY		14	0401			0		48	Asia/Kuala_Lumpur	2021-04-17
+1763915	Kampong Sungai Merali	Kampong Sungai Merali		3.2	101.7	P	PPL	MY		14	0401			0		42	Asia/Kuala_Lumpur	2021-04-17
+1764476	Kampong Seri Medan	Kampong Seri Medan	Kampong Seri Medan,Kampong Sri Medan	3.1	101.73333	P	PPL	MY		14	0401			0		84	Asia/Kuala_Lumpur	2021-04-17
+1766272	Kampong Pandan Quarters	Kampong Pandan Quarters		3.13333	101.73333	P	PPLX	MY		14	0401			0		46	Asia/Kuala_Lumpur	2021-04-17
+1766273	Kampong Pandan Dalam	Kampong Pandan Dalam		3.15	101.73333	P	PPL	MY		14	0401			0		49	Asia/Kuala_Lumpur	2021-04-17
+1768334	Kampong Datuk Keramat	Kampong Datuk Keramat	Datuk Keramat,Datuk Keramat Village	3.16667	101.73333	P	PPL	MY		14	0401			13061		37	Asia/Kuala_Lumpur	2024-10-28
+1769633	Kampong Dollah	Kampong Dollah		3.15	101.71667	P	PPLX	MY		14	0401			0		39	Asia/Kuala_Lumpur	2021-04-17
+1770191	Kampong Bukit Mati	Kampong Bukit Mati		3.15	101.66667	P	PPL	MY		14	0401			0		94	Asia/Kuala_Lumpur	2021-04-17
+1771357	Kampong Baharu	Kampong Baharu		3.16667	101.71667	P	PPLX	MY		14	0401			0		42	Asia/Kuala_Lumpur	2021-04-17
+1777077	Cheras	Cheras	Cheras,Chiau-nai,Chiau-nāi,Tsiau-lai,Tsiâu-lai,Ziu Laai,ceras,jiao lai,செராஸ்,蕉賴	3.108	101.726	P	PPL	MY		12				135823		60	Asia/Kuala_Lumpur	2024-10-14
+1780846	Batu Empat	Batu Empat	Batu Ampat,Batu Empat	3.16667	101.75	P	PPL	MY		12	1701			0		48	Asia/Kuala_Lumpur	2021-04-17
+7115975	Chinatown	Chinatown		3.14378	101.69814	P	PPLX	MY		14	0401			0		42	Asia/Kuala_Lumpur	2021-04-17
+7932108	Taman Cempaka	Taman Cempaka		3.13854	101.74953	P	PPLX	MY		12	1702			0		50	Asia/Kuala_Lumpur	2021-04-17
+9781081	Setapak Jaya	Setapak Jaya		3.18894	101.72786	P	PPLX	MY		14	0401			0		52	Asia/Kuala_Lumpur	2021-04-17
+10177074	Kuala Lumpur Village	Kuala Lumpur Village		3.15427	101.68486	P	PPLX	MY		14	0401			0		71	Asia/Kuala_Lumpur	2021-04-17
+11054399	Bukit Bintang	Bukit Bintang	Star Hill,Starhill	3.14657	101.71023	P	PPL	MY		14	0401			120529	0	56	Asia/Kuala_Lumpur	2024-10-24
+11054400	Golden Triangle	Golden Triangle		3.15526	101.71063	P	PPLX	MY		14	0401			0	0	12	Asia/Kuala_Lumpur	2021-04-17
+11054404	Chow Kit	Chow Kit		3.16236	101.69567	P	PPLX	MY		14	0401			0	0	97	Asia/Kuala_Lumpur	2021-04-17
+11054407	Istana Negara	Istana Negara		3.13251	101.69584	P	PPLX	MY		14	0401			0	0	47	Asia/Kuala_Lumpur	2021-04-17
+11054409	Lake Gardens	Lake Gardens		3.14275	101.68431	P	PPLX	MY		14	0401			0	0	35	Asia/Kuala_Lumpur	2021-04-17
+11054412	Taman Maluri	Taman Maluri		3.1333	101.72855	P	PPLX	MY		14	0401			0	0	40	Asia/Kuala_Lumpur	2021-04-17
+12750573	Taman Ikan Emas	Taman Ikan Emas	Golden Fish,Ikan Emas,Taman Ikan Emas	3.11619	101.7202	P	PPL	MY		14	0401			10046		71	Asia/Kuala_Lumpur	2024-06-13
+12750575	Bangsar	Bangsar		3.12945	101.67004	P	PPL	MY		14	0401			40000		77	Asia/Kuala_Lumpur	2024-04-21
+13118232	Kampung Baru	Kampung Baru	Kampung Bharu	3.16544	101.70394	P	PPL	MY		14	0401			1587		61	Asia/Kuala_Lumpur	2024-10-24
+13118233	Titiwangsa	Titiwangsa		3.17822	101.70312	P	PPL	MY		14	0401			122096		60	Asia/Kuala_Lumpur	2024-10-24
+13118278	Brickfields	Brickfields		3.12966	101.68424	P	PPL	MY		14	0401			12000		59	Asia/Kuala_Lumpur	2024-10-27
+13118381	Taman Desa	Taman Desa		3.10591	101.68683	P	PPL	MY		14	0401			25000		61	Asia/Kuala_Lumpur	2024-10-28
