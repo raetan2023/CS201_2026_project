@@ -4,7 +4,7 @@ CS201 project: **Beyond the Classic TSP**.
 
 This project compares two redesigned routing algorithms for one rider delivering orders with different food shelf lives. Unlike classic TSP, the route ends at the last customer and orders may be cancelled. The objectives are, in order: **deliver as many orders on time as possible**, then **minimise the average waiting time of delivered orders**.
 
-The experiments use V1: `deadline = order time + shelf life`. All orders are known when the rider leaves at time 0. The optional V2 waiting-time cap in the problem template is not part of these experiments.
+The deadline rule is `deadline = order time + shelf life`. All orders are known when the rider leaves at time 0.
 
 ## 1. Requirements
 
@@ -39,8 +39,8 @@ On macOS/Linux, use `python3` instead of `python` where needed. The Bash script 
 | `data/raw/` | Original GeoNames `MY.txt`, metadata and an optional spreadsheet copy |
 | `data/processed/` | Worked-example JSON and generated experiment JSON inputs |
 | `results/` | Per-instance results, aggregated results, charts and a column guide |
-| `docs/` | Data decisions, historical problem template, and final submission audit |
-| `slides.pptx` | Current presentation draft; outstanding corrections are listed in `docs/SUBMISSION_AUDIT.md` |
+| `docs/` | Data decisions and the current problem template |
+| `slides.pptx` | Presentation slides, maintained separately from the source code |
 | `requirements.txt` | Tested matplotlib version for chart regeneration |
 | `run_tests.bat` / `run_tests.sh` | One-command entry points for Windows and macOS/Linux |
 | `out/` | Compiled classes generated locally; excluded from submission |
@@ -105,7 +105,7 @@ The primary source is the supplied Malaysian [GeoNames dataset](https://www.geon
 
 The generator uses GeoNameID, name, latitude, longitude and feature class. It selects populated places within 6 km of Bukit Bintang Plaza and removes duplicate coordinates, leaving 33 locations. Larger inputs reuse locations. Derived attributes are order time, food type, shelf life and a travel-time matrix calculated from straight-line distance at 20 km/h. Inputs store these attributes as JSON so all algorithms receive the same data.
 
-Selection rationale, preprocessing, parameter choices and limitations are documented in [docs/data_decisions.md](docs/data_decisions.md). The Java generator uses seeded `java.util.Random`; its generated inputs differ from the older Python template's random sequence. The template's worked example is therefore reconstructed from its fixed table and checked separately.
+Selection rationale, preprocessing, parameter choices and limitations are documented in [docs/data_decisions.md](docs/data_decisions.md). The Java generator uses seeded `java.util.Random`; the fixed worked example is reconstructed from its published table and checked separately from randomly generated inputs.
 
 ### How the 540 inputs are generated
 
@@ -150,7 +150,7 @@ The brief requires source/data in **`G<X>T<X>.zip`** (replace the placeholders w
 - [ ] Acknowledge AI tools used, how/where they were used, which contributions are original, and **three actual representative prompts**. Include this documentation in the submission and acknowledge AI use in the slides. Section 11.3 refers to a project report although the deliverables list specifies code and slides; confirm the intended report format with the teaching team.
 - [ ] Ensure all team members can explain and defend the implementation and results.
 
-This README covers folder structure, prerequisites, execution, test cases, data provenance and packaging instructions. The unchecked items above must be completed before the submission as a whole meets the brief. See [the final audit](docs/SUBMISSION_AUDIT.md) for verified files and remaining issues.
+This README covers folder structure, prerequisites, execution, test cases, data provenance and packaging instructions. The unchecked items above must be completed before the submission as a whole meets the brief.
 
 ## 6. Troubleshooting
 

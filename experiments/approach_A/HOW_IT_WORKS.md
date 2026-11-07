@@ -284,17 +284,16 @@ fixed number of passes to cap run time.
 
 ## 7. How the code fits the group template
 
-The original design template is `docs/Deadline-Aware Food Delivery Problem Template.docx`. The root README and data decisions describe the current Java/V1 scope.
+The problem template is `docs/Deadline-Aware Food Delivery Problem Template.docx`. The root README and data decisions describe the current Java implementation.
 The data rules are in `docs/data_decisions.md`. A matches B's current status:
 
 | Template rule | Current code |
 |---|---|
-| V1 deadline = order time + shelf life | Done |
+| Deadline = order time + shelf life | Done |
 | Orders that can't be on time are cancelled | Done (`dropped`) |
 | Only valid routes (late = 0) | Done: `walk` only delivers on time |
 | Rider leaves at t = 0; order times can be negative | Done |
 | Goals compared in order (cancelled first, wait breaks ties) | Done: built into `isBetter` |
-| V2 (60-minute wait cap) | Not used: the group dropped V2 and uses V1 only |
 | Reads the shared instance files | Done by the shared tools: `Instance.toSolverInstance()` in `src/com/delivery/tools/` |
 | Reports delivered, cancelled, average wait, longest wait, run time | Done by `RunExperiments` (every route re-scored by `Evaluate`) |
 | Customer ids 1…n, matrix index k = customer k | Solver ids stay 0…n−1; the shared tools convert (customer k = solver id k − 1) |

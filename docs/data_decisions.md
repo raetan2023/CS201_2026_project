@@ -1,8 +1,6 @@
 # Data decisions
 
-How we turn `data/raw/MY.txt` into test data, and why. The current implementation and submitted experiment results use **Java and V1 only**, as described in the root README. The retained DOCX/PDF problem templates are historical design references: their Python commands and requirement to run both V1 and V2 do not describe this implementation.
-
-The official project brief permits Java and requires two meaningfully different redesigned approaches, not two deadline versions. The team should still confirm the scope change noted under [Open items](#open-items).
+How we turn `data/raw/MY.txt` into test data, and why. The implementation, problem template and submitted experiments use Java with one deadline rule: **deadline = order time + shelf life**. The DOCX/PDF templates describe this same problem and the shared Java tools.
 
 ---
 
@@ -104,7 +102,7 @@ touch `MY.txt`. This means:
 
 **Included set:** n = 5, 8, 10, 20, 50, 100 × tightness 0.5, 1.0, 1.5 × seeds 1–30 = **540 files,
 about 14 MB**, in `data/processed/`. The deadline (order time + shelf life) is worked out
-when scoring. We use the template's V1 only; V2 (60-minute wait cap) was dropped by the group.
+when scoring.
 
 **Generated** with the shared Java tools in `src/com/delivery/tools/` (`GenerateInstance`): 540 files, about 14 MB. Randomness comes from `java.util.Random`, seeded from (n, seed); the tightness only scales the shelf lives, so the three tightness files for one (n, seed) share customers, order times and food. How to regenerate and run: `experiments/comparison/README.md`.
 
@@ -112,21 +110,9 @@ The template's worked example can't be regenerated (Java's random numbers differ
 
 ---
 
-## Open items
+## Shared implementation
 
-1. **Done (pending Hanlin's confirmation): generating and scoring are in Java** (`src/com/delivery/tools/`, checked against the template's worked example). Original question: **Confirm with Hanlin that generating and scoring can be in Java.** We recall Hanlin saying
-   our tests can be in Java, but the template still says every method must use
-   `generate_instance.py` and `evaluate.py`, which are Python. Those files are not in this repo.
-   The brief requires "ALL source codes required to reproduce the experiments", so the
-   submission needs a generator and a scorer in some language. If Java:
-   - Everyone must use one shared Java generator and scorer. Separate copies would break the
-     template's "same data, same scoring" rule.
-   - Java's random numbers differ from Python's, so the same seed gives different test cases from
-     the template's. The template's worked example won't regenerate, and needs keeping as a
-     fixed file.
-   - Check the Java scorer against the template's worked example: for n = 6, seed 10, the best
-     route has average wait 29.0 (done: `CheckWorkedExample`).
-2. **Pick a teammate to check this file** before it is used in the presentation.
+All methods use `GenerateInstance.java` and `Evaluate.java`, with parameters in `Common.java`. `CheckWorkedExample` reconstructs the fixed six-customer example and confirms the scorer and exact solver against its published answers. No separate Python generator or scorer is required.
 
 ---
 
@@ -134,4 +120,4 @@ The template's worked example can't be regenerated (Java's random numbers differ
 
 - `Project_2627T1.pdf` is at the project root and is already tracked by Git. The old ignore entry for `docs/Project_2627T1.pdf` does not apply to it. The assignment brief is a reference, not a required runtime input; leave it out of the final source/data ZIP.
 - Approach source and explanations live under `experiments/`; shared tooling is in `src/`, and comparison output is in `results/`.
-- The old template's claim that minimising average wait is equivalent to minimising total arrival time holds only for the same delivered customer set. Different delivered subsets can have different sums of order times. The actual scorer correctly uses `arrival - order_time`.
+- Minimising average wait is equivalent to minimising total arrival time only for the same delivered customer set. Different delivered subsets can have different sums of order times. The actual scorer correctly uses `arrival - order_time`.
