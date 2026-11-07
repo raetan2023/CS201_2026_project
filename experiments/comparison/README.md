@@ -1,7 +1,6 @@
 # Comparison: how to run the experiments
 
-We use one version of the problem (the template's V1): deadline = order time + shelf life.
-The template's V2 (a 60-minute wait cap) was dropped by the group.
+All methods use the same deadline rule: deadline = order time + shelf life.
 
 Everything here is Java 17+, no extra libraries. The charts need Python 3 with matplotlib
 (optional).
