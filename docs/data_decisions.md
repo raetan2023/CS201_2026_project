@@ -1,10 +1,6 @@
 # Data decisions
 
-How we turn `data/raw/MY.txt` into test data, and why. Hanlin's template
-(`docs/Deadline-Aware Food Delivery Problem Template.docx`) is the final set of rules. If this
-file and the template disagree, the template wins.
-
-**Two items are still open: see [Open items](#open-items).**
+How we turn `data/raw/MY.txt` into test data, and why. The implementation, problem template and submitted experiments use Java with one deadline rule: **deadline = order time + shelf life**. The DOCX/PDF templates describe this same problem and the shared Java tools.
 
 ---
 
@@ -40,7 +36,7 @@ file and the template disagree, the template wins.
 | 3 | Which row to keep for duplicate coordinates? | No change to the rule | The row kept is already a `PPL` in all 7 cases. Duplicates share coordinates, so only the name could differ |
 | 4 | Are Kampung Baru and Kampong Baharu the same place? | Keep both | They are 1.4 km apart, and nothing in the data proves they are the same place. Kampong Baharu is also in the template's worked example |
 | 5 | Use the population column? | No | Many of the 33 locations show 0, and nothing in the template needs it |
-| 6 | Keep straight-line travel times? | Yes | Set by the template. They also obey the triangle inequality, which Approach A's "definitely lost" check relies on |
+| 6 | Keep straight-line travel times? | Yes | Set by the template. They also obey the triangle inequality, which Approach B's "definitely lost" check relies on |
 | 7 | Include the `.xlsx` in the submission? | Keep it in the repo, leave it out of the zip | The brief asks for data "in the format used", and nothing reads it |
 
 ### Why hotels are left out
@@ -104,34 +100,24 @@ touch `MY.txt`. This means:
 
 **Name format:** `n8_s1_t1.0.json` means 8 orders, seed 1, tightness 1.0.
 
-**Planned set:** n = 5, 8, 10, 20, 50, 100 × tightness 0.5, 1.0, 1.5 × seeds 1–30 = **540 files,
-about 16.5 MB (estimated)**, in `data/processed/`. V1 and V2 share the same files, because the
-deadline is worked out when scoring.
+**Included set:** n = 5, 8, 10, 20, 50, 100 × tightness 0.5, 1.0, 1.5 × seeds 1–30 = **540 files,
+about 14 MB**, in `data/processed/`. The deadline (order time + shelf life) is worked out
+when scoring.
 
-**Not generated yet.** This is waiting on open item 1.
+**Generated** with the shared Java tools in `src/com/delivery/tools/` (`GenerateInstance`): 540 files, about 14 MB. Randomness comes from `java.util.Random`, seeded from (n, seed); the tightness only scales the shelf lives, so the three tightness files for one (n, seed) share customers, order times and food. How to regenerate and run: `experiments/comparison/README.md`.
+
+The template's worked example can't be regenerated (Java's random numbers differ from Python's), so it is rebuilt from the template's table and kept as `data/processed/example_n6_s10.json`. `CheckWorkedExample` confirms the Java scorer and brute force reproduce the template: best route 1→2→5→4→6→3 (average 29.0, longest 62.7), nearest neighbour cancels Kuala Lumpur Village (21.9). Travel times match to 0.1 min except Kampong Baharu (6.85 min, shown as 6.9 in the template).
 
 ---
 
-## Open items
+## Shared implementation
 
-1. **Confirm with Hanlin that generating and scoring can be in Java.** We recall Hanlin saying
-   our tests can be in Java, but the template still says every method must use
-   `generate_instance.py` and `evaluate.py`, which are Python. Those files are not in this repo.
-   The brief requires "ALL source codes required to reproduce the experiments", so the
-   submission needs a generator and a scorer in some language. If Java:
-   - Everyone must use one shared Java generator and scorer. Separate copies would break the
-     template's "same data, same scoring" rule.
-   - Java's random numbers differ from Python's, so the same seed gives different test cases from
-     the template's. The template's worked example won't regenerate, and needs keeping as a
-     fixed file.
-   - Check the Java scorer against the template's worked example: for n = 6, seed 10, the best
-     V1 route has average wait 29.0 and the best V2 route 29.8.
-2. **Pick a teammate to check this file** before it is used in the presentation.
+All methods use `GenerateInstance.java` and `Evaluate.java`, with parameters in `Common.java`. `CheckWorkedExample` reconstructs the fixed six-customer example and confirms the scorer and exact solver against its published answers. No separate Python generator or scorer is required.
 
 ---
 
 ## Repo notes
 
-- `docs/Project_2627T1.pdf` is marked "SMU Classification: Restricted", so it is in `.gitignore`
-  and is not pushed. Get the brief from eLearn.
-- Results and code for each approach live under `experiments/`, as the brief requires.
+- `Project_2627T1.pdf` is at the project root and is already tracked by Git. The old ignore entry for `docs/Project_2627T1.pdf` does not apply to it. The assignment brief is a reference, not a required runtime input; leave it out of the final source/data ZIP.
+- Approach source and explanations live under `experiments/`; shared tooling is in `src/`, and comparison output is in `results/`.
+- Minimising average wait is equivalent to minimising total arrival time only for the same delivered customer set. Different delivered subsets can have different sums of order times. The actual scorer correctly uses `arrival - order_time`.

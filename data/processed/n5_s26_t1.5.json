@@ -1,0 +1,18 @@
+{"n": 5, "seed": 26, "tight": 1.5,
+ "restaurant": {"geonameid": "7284944", "name": "Bukit Bintang Plaza", "lat": 3.14750, "lon": 101.70932},
+ "customers": [
+  {"id": 1, "geonameid": "1766272", "name": "Kampong Pandan Quarters", "lat": 3.13333, "lon": 101.73333, "order_time": -2.86, "food": "rice", "shelf_life": 135.0},
+  {"id": 2, "geonameid": "13118381", "name": "Taman Desa", "lat": 3.10591, "lon": 101.68683, "order_time": -1.42, "food": "noodles", "shelf_life": 90.0},
+  {"id": 3, "geonameid": "11054407", "name": "Istana Negara", "lat": 3.13251, "lon": 101.69584, "order_time": 0.00, "food": "rice", "shelf_life": 135.0},
+  {"id": 4, "geonameid": "1744508", "name": "Seputeh", "lat": 3.11667, "lon": 101.68333, "order_time": -2.82, "food": "ice_cream", "shelf_life": 45.0},
+  {"id": 5, "geonameid": "1768334", "name": "Kampong Datuk Keramat", "lat": 3.16667, "lon": 101.73333, "order_time": -7.56, "food": "noodles", "shelf_life": 90.0}
+ ],
+ "travel_min": [
+  [0.0000, 9.2898, 15.7670, 6.7204, 13.4429, 10.2396],
+  [9.2898, 0.0000, 17.9879, 12.4904, 17.5572, 11.1217],
+  [15.7670, 17.9879, 0.0000, 9.3671, 3.7740, 25.5090],
+  [6.7204, 12.4904, 9.3671, 0.0000, 6.7293, 16.9051],
+  [13.4429, 17.5572, 3.7740, 6.7293, 0.0000, 23.5703],
+  [10.2396, 11.1217, 25.5090, 16.9051, 23.5703, 0.0000]
+ ]
+}

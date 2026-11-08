@@ -1,0 +1,18 @@
+{"n": 5, "seed": 8, "tight": 1.5,
+ "restaurant": {"geonameid": "7284944", "name": "Bukit Bintang Plaza", "lat": 3.14750, "lon": 101.70932},
+ "customers": [
+  {"id": 1, "geonameid": "11054399", "name": "Bukit Bintang", "lat": 3.14657, "lon": 101.71023, "order_time": -6.98, "food": "rice", "shelf_life": 135.0},
+  {"id": 2, "geonameid": "9781081", "name": "Setapak Jaya", "lat": 3.18894, "lon": 101.72786, "order_time": 0.00, "food": "noodles", "shelf_life": 90.0},
+  {"id": 3, "geonameid": "11054409", "name": "Lake Gardens", "lat": 3.14275, "lon": 101.68431, "order_time": -1.83, "food": "rice", "shelf_life": 135.0},
+  {"id": 4, "geonameid": "1766272", "name": "Kampong Pandan Quarters", "lat": 3.13333, "lon": 101.73333, "order_time": -1.10, "food": "noodles", "shelf_life": 90.0},
+  {"id": 5, "geonameid": "1735161", "name": "Kuala Lumpur", "lat": 3.14120, "lon": 101.68653, "order_time": -4.70, "food": "ice_cream", "shelf_life": 45.0}
+ ],
+ "travel_min": [
+  [0.0000, 0.4337, 15.1403, 8.4797, 9.2898, 7.8765],
+  [0.4337, 0.0000, 15.3053, 8.7270, 8.8718, 8.0948],
+  [15.1403, 15.3053, 0.0000, 21.1618, 18.6399, 21.0504],
+  [8.4797, 8.7270, 21.1618, 0.0000, 16.6274, 0.9023],
+  [9.2898, 8.8718, 18.6399, 16.6274, 0.0000, 15.8079],
+  [7.8765, 8.0948, 21.0504, 0.9023, 15.8079, 0.0000]
+ ]
+}
