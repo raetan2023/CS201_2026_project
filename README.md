@@ -127,7 +127,7 @@ The seed makes these random choices repeatable: the same settings and unchanged 
 
 A file named `n8_s1_t0.5.json` contains 8 orders, uses seed 1, and applies multiplier 0.5. There are 180 randomly generated scenarios, each evaluated under three shelf-life settings; the 540 inputs are not all independent random scenarios. Thirty seeds per setting allow the results to describe variation instead of relying on one example.
 
-## 6. Troubleshooting
+## 5. Troubleshooting
 
 | Symptom | Action |
 |---|---|
