@@ -118,6 +118,6 @@ All methods use `GenerateInstance.java` and `Evaluate.java`, with parameters in 
 
 ## Repo notes
 
-- `Project_2627T1.pdf` is at the project root and is already tracked by Git. The old ignore entry for `docs/Project_2627T1.pdf` does not apply to it. The assignment brief is a reference, not a required runtime input; leave it out of the final source/data ZIP.
+- `Project_2627T1.pdf` (the assignment brief, marked SMU Restricted) is no longer tracked by Git and is listed in `.gitignore`. It is a reference, not a runtime input, so it stays out of the repository and the final source/data ZIP.
 - Approach source and explanations live under `experiments/`; shared tooling is in `src/`, and comparison output is in `results/`.
 - Minimising average wait is equivalent to minimising total arrival time only for the same delivered customer set. Different delivered subsets can have different sums of order times. The actual scorer correctly uses `arrival - order_time`.

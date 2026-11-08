@@ -6,6 +6,16 @@ This project compares two redesigned routing algorithms for one rider delivering
 
 The deadline rule is `deadline = order time + shelf life`. All orders are known when the rider leaves at time 0.
 
+## Team
+
+CS201 Group [G1] (replace with the real group and team numbers before submitting)
+
+- Lee Looi Le
+- Thu Thu San Eain
+- Tung Geng Hong
+- Tan Sze Lui, Rae
+- Wu Hanlin
+
 ## 1. Requirements
 
 - **JDK 17 or newer**, with both `java` and `javac` on PATH. The Java code uses only the standard library; no Maven, Gradle or external JARs are required.
