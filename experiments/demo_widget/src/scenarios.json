@@ -1,0 +1,5 @@
+[
+  {"name": "Where B helps most", "places": 8, "seed": 9, "tight": 1.5, "expect": [6, 8, 8]},
+  {"name": "B's blind spot", "places": 8, "seed": 5, "tight": 1.0, "expect": [4, 6, 7]},
+  {"name": "NN beats B", "places": 8, "seed": 9, "tight": 0.5, "expect": [5, 4, 5]}
+]

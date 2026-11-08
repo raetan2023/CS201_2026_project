@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Deadline-aware delivery</title>
+<style>
+:root {
+  --ink: #000;
+  --paper: #fff;
+  --quiet: #55585c;
+  --rule: #c9ccd0;
+  --ice: #d6e8f7;
+  --noodles: #f8e3c4;
+  --rice: #d9efdd;
+  --picked: #eef0f2;
+  font-family: Cambria, "Times New Roman", serif;
+  font-variant-numeric: lining-nums tabular-nums;
+  color: var(--ink);
+  background: var(--paper);
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  height: 100vh;
+  font-size: 17px;
+  line-height: 1.35;
+}
+
+/* Top bar */
+.bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 8px 22px;
+  padding: 10px 20px;
+  border-bottom: 1px solid var(--ink);
+}
+h1 { font-size: 25px; font-weight: 700; margin: 0 auto 0 0; align-self: center; }
+.field { display: grid; gap: 2px; font-size: 14px; color: var(--quiet); }
+select, input, button { font: inherit; color: var(--ink); }
+select, input {
+  font-size: 16px;
+  height: 34px;
+  padding: 0 6px;
+  border: 1px solid var(--ink);
+  background: var(--paper);
+  border-radius: 0;
+}
+input { width: 72px; }
+button {
+  height: 34px;
+  padding: 0 14px;
+  font-size: 16px;
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  cursor: pointer;
+}
+button:hover:not(:disabled) { background: var(--picked); }
+button:disabled { color: var(--rule); border-color: var(--rule); cursor: default; }
+:focus-visible { outline: 3px solid #1f6fb2; outline-offset: 2px; }
+
+/* Main area */
+main {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  min-height: 0;
+}
+.tree-wrap { display: grid; grid-template-rows: minmax(0, 1fr) auto; min-height: 0; min-width: 0; }
+.tree-scroll { overflow: auto; min-height: 0; padding: 8px 12px 0; }
+#tree { display: block; width: 100%; height: 100%; }
+.key {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 18px;
+  padding: 6px 20px 8px;
+  font-size: 14px;
+  color: var(--quiet);
+}
+.key span { display: inline-flex; align-items: center; gap: 6px; }
+.swatch { width: 15px; height: 15px; border-radius: 50%; border: 1px solid var(--ink); }
+.swatch.black { background: var(--ink); }
+.size { margin-left: auto; }
+
+aside {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 0;
+  padding: 12px 16px;
+  border-left: 1px solid var(--ink);
+  overflow: auto;
+}
+#map { display: block; width: 100%; flex: 0 0 auto; border: 1px solid var(--rule); }
+.where { font-size: 19px; font-weight: 700; margin: 0; }
+.why { margin: 0; flex: 1 1 auto; }
+.why p { margin: 0 0 7px; }
+.why .death { font-weight: 700; }
+.steps { display: flex; gap: 8px; }
+.steps button { flex: 1; padding: 0 6px; }
+
+/* Tree */
+.edge { fill: none; stroke: var(--ink); }
+.edge.option { stroke-width: 1; stroke-dasharray: 5 5; stroke: var(--quiet); }
+.edge.dead { stroke-width: 1; }
+.edge.taken { stroke-width: 4.5; }
+.node { cursor: pointer; }
+.node circle { stroke: var(--ink); stroke-width: 1.5; }
+.node.ice_cream circle { fill: var(--ice); }
+.node.noodles circle { fill: var(--noodles); }
+.node.rice circle { fill: var(--rice); }
+.node.chosen circle { stroke-width: 5; }
+.node:hover circle, .node:focus-visible circle { stroke-width: 3; }
+.node.chosen:hover circle { stroke-width: 5; }
+.node .num { font-size: 13px; text-anchor: middle; }
+.node .time { font-size: 18px; font-weight: 700; text-anchor: middle; }
+.node.dead circle { fill: var(--ink); }
+.node.dead text { fill: var(--paper); }
+.node.dying circle { animation: blacken .7s ease-in both; }
+.node.dying text { animation: whiten .7s ease-in both; }
+@keyframes blacken { from { fill: var(--paper); } to { fill: var(--ink); } }
+@keyframes whiten { from { fill: var(--ink); } to { fill: var(--paper); } }
+.label { font-size: 14.5px; text-anchor: middle; }
+.label.dead-name { font-weight: 700; paint-order: stroke; stroke: var(--paper); stroke-width: 5px; }
+.label.due { font-size: 13px; fill: var(--quiet); }
+.root-label { font-size: 16px; }
+.rootnode circle { fill: var(--paper); stroke: var(--ink); stroke-width: 4.5; }
+.rootnode .time { font-size: 18px; font-weight: 700; text-anchor: middle; }
+.dot { stroke: var(--ink); stroke-width: 1; fill: var(--paper); }
+.dot.dies { fill: var(--ink); }
+
+/* Map */
+.road { fill: none; stroke: var(--ink); stroke-width: 2.5; }
+.pin { stroke: var(--ink); stroke-width: 1; }
+.pin.ice_cream { fill: var(--ice); }
+.pin.noodles { fill: var(--noodles); }
+.pin.rice { fill: var(--rice); }
+.pin.done { stroke-width: 2.5; }
+.pin.gone { fill: var(--ink); }
+.pin-num { font-size: 12px; text-anchor: middle; }
+.pin-num.gone { fill: var(--paper); }
+.rider { fill: none; stroke: var(--ink); stroke-width: 2; stroke-dasharray: 3 2; }
+
+/* Results */
+footer { border-top: 1px solid var(--ink); padding: 4px 20px 6px; }
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 2px 8px; text-align: right; font-weight: 400; }
+th { font-size: 14px; color: var(--quiet); }
+th:first-child, td:first-child { text-align: left; width: 34%; }
+tbody tr { cursor: pointer; }
+tbody tr:hover { background: var(--picked); }
+tbody tr.on { font-weight: 700; background: var(--picked); }
+td button { all: unset; cursor: pointer; }
+td button:focus-visible { outline: 3px solid #1f6fb2; outline-offset: 2px; }
+.note { margin: 3px 0 0; font-size: 13px; color: var(--quiet); }
+
+@media (max-width: 900px) {
+  body { height: auto; display: block; }
+  main { grid-template-columns: minmax(0, 1fr); }
+  aside { border-left: 0; border-top: 1px solid var(--ink); }
+  .tree-scroll { max-height: 70vh; }
+  #tree { width: 760px; height: auto; }
+  .bar { padding: 10px 16px; }
+  footer { padding: 4px 16px 8px; overflow-x: auto; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .node.dying circle, .node.dying text { animation: none; }
+}
+</style>
+</head>
+<body>
+<header class="bar">
+  <h1>Deadline-aware delivery</h1>
+  <label class="field">Scenario <select id="scenario"></select></label>
+  <label class="field">Orders
+    <select id="places"><option>8</option><option>10</option></select>
+  </label>
+  <label class="field">Order set <select id="seed"></select></label>
+  <label class="field">Tightness
+    <select id="tight">
+      <option value="0.5">0.5</option><option value="1">1.0</option><option value="1.5">1.5</option>
+    </select>
+  </label>
+  <button id="reset" type="button">Reset orders</button>
+</header>
+
+<main>
+  <section class="tree-wrap" aria-label="Search tree">
+    <div class="tree-scroll" id="treeScroll"><svg id="tree" role="img" aria-label="Search tree of the rider's choices"></svg></div>
+    <div class="key">
+      <span><i class="swatch" style="background:var(--ice)"></i>Ice cream</span>
+      <span><i class="swatch" style="background:var(--noodles)"></i>Noodles</span>
+      <span><i class="swatch" style="background:var(--rice)"></i>Rice</span>
+      <span><i class="swatch black"></i>Dead: can't arrive on time</span>
+      <span>● dies if the rider goes here next</span>
+      <span>○ survives</span>
+      <span class="size" id="size"></span>
+    </div>
+  </section>
+  <aside>
+    <svg id="map" viewBox="0 0 308 220" role="img" aria-label="Map of the route so far"></svg>
+    <p class="where" id="where"></p>
+    <div class="why" id="why" aria-live="polite"></div>
+    <div class="steps">
+      <button id="back" type="button">Back</button>
+      <button id="next" type="button">Next</button>
+      <button id="play" type="button">Play</button>
+    </div>
+  </aside>
+</main>
+
+<footer>
+  <table>
+    <thead><tr><th>Click a row to follow its path</th><th>Delivered</th><th>Cancelled</th><th>Average wait (min)</th><th>Longest wait (min)</th></tr></thead>
+    <tbody id="results"></tbody>
+  </table>
+  <p class="note">Orders come from the project's inputs, data/processed/n{orders}_s{set}_t{tightness}.json, so until you change a food these rows match results/raw_results.csv. Approach B here is a JavaScript copy of SolverB.java, checked route for route against the Java. Click a node to change that customer's food. Location data: GeoNames, CC BY 4.0.</p>
+</footer>
+<script>
+/*__SCRIPT__*/
+</script>
+</body>
+</html>
