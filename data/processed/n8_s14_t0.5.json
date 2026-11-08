@@ -1,0 +1,24 @@
+{"n": 8, "seed": 14, "tight": 0.5,
+ "restaurant": {"geonameid": "7284944", "name": "Bukit Bintang Plaza", "lat": 3.14750, "lon": 101.70932},
+ "customers": [
+  {"id": 1, "geonameid": "11054412", "name": "Taman Maluri", "lat": 3.13330, "lon": 101.72855, "order_time": -4.62, "food": "rice", "shelf_life": 45.0},
+  {"id": 2, "geonameid": "1780846", "name": "Batu Empat", "lat": 3.16667, "lon": 101.75000, "order_time": -3.59, "food": "ice_cream", "shelf_life": 15.0},
+  {"id": 3, "geonameid": "1766272", "name": "Kampong Pandan Quarters", "lat": 3.13333, "lon": 101.73333, "order_time": 0.00, "food": "rice", "shelf_life": 45.0},
+  {"id": 4, "geonameid": "1766273", "name": "Kampong Pandan Dalam", "lat": 3.15000, "lon": 101.73333, "order_time": -0.25, "food": "ice_cream", "shelf_life": 15.0},
+  {"id": 5, "geonameid": "1749805", "name": "Pudu", "lat": 3.13333, "lon": 101.71667, "order_time": -5.04, "food": "ice_cream", "shelf_life": 15.0},
+  {"id": 6, "geonameid": "11054399", "name": "Bukit Bintang", "lat": 3.14657, "lon": 101.71023, "order_time": -0.39, "food": "ice_cream", "shelf_life": 15.0},
+  {"id": 7, "geonameid": "7932108", "name": "Taman Cempaka", "lat": 3.13854, "lon": 101.74953, "order_time": -0.37, "food": "noodles", "shelf_life": 30.0},
+  {"id": 8, "geonameid": "1769633", "name": "Kampong Dollah", "lat": 3.15000, "lon": 101.71667, "order_time": -5.98, "food": "noodles", "shelf_life": 30.0}
+ ],
+ "travel_min": [
+  [0.0000, 7.9665, 14.9829, 9.2898, 8.0406, 5.3233, 0.4337, 13.7227, 2.5863],
+  [7.9665, 0.0000, 13.2273, 1.5922, 5.7939, 3.9571, 7.5386, 7.2034, 6.8332],
+  [14.9829, 13.2273, 0.0000, 12.4307, 7.8583, 15.7143, 14.8468, 9.3850, 12.4164],
+  [9.2898, 1.5922, 12.4307, 0.0000, 5.5609, 5.5492, 8.8718, 5.6690, 7.8560],
+  [8.0406, 5.7939, 7.8583, 5.5609, 0.0000, 7.8560, 7.7788, 6.6129, 5.5491],
+  [5.3233, 3.9571, 15.7143, 5.5492, 7.8560, 0.0000, 4.9100, 11.0823, 5.5609],
+  [0.4337, 7.5386, 14.8468, 8.8718, 7.7788, 4.9100, 0.0000, 13.3614, 2.4311],
+  [13.7227, 7.2034, 9.3850, 5.6690, 6.6129, 11.0823, 13.3614, 0.0000, 11.5935],
+  [2.5863, 6.8332, 12.4164, 7.8560, 5.5491, 5.5609, 2.4311, 11.5935, 0.0000]
+ ]
+}
