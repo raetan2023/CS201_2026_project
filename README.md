@@ -127,31 +127,6 @@ The seed makes these random choices repeatable: the same settings and unchanged 
 
 A file named `n8_s1_t0.5.json` contains 8 orders, uses seed 1, and applies multiplier 0.5. There are 180 randomly generated scenarios, each evaluated under three shelf-life settings; the 540 inputs are not all independent random scenarios. Thirty seeds per setting allow the results to describe variation instead of relying on one example.
 
-## 5. Submission checklist
-
-The brief requires source/data in **`G<X>T<X>.zip`** (replace the placeholders with your group and team numbers), plus **presentation slides**, through eLearn by **Week 12 Sunday, 11 pm**. Peer evaluation is due in class in Week 13.
-
-### Source and data ZIP
-
-- [ ] Include this README, `run_tests.bat`, `run_tests.sh`, `requirements.txt`, `src/`, and `experiments/` with all Java source and reproduction scripts.
-- [ ] Include `data/raw/MY.txt`, `data/raw/Metadata.txt`, and all **540 generated JSON inputs**, plus the worked example, in `data/processed/`. The 540 inputs and worked example are now included.
-- [ ] Include `results/` and `docs/data_decisions.md` so the submitted results and preprocessing are documented.
-- [ ] Include any additional source/data needed to reproduce examples or experiments shown in the final slides. The current draft is `slides.pptx`; upload the completed slides alongside the source ZIP.
-- [ ] Include third-party libraries used, as required by the brief, with installation/run instructions. Java needs none; chart regeneration uses matplotlib, which is **not currently bundled**. A pip command alone does not fulfil the brief's instruction to include libraries.
-- [ ] Extract the final ZIP into a fresh folder and run the quick tests and full experiment command in section 3.
-- [ ] Exclude `.git/`, `out/`, Office lock files and obsolete archives. The assignment brief and optional spreadsheet copy are not required runtime inputs.
-
-### Presentation and acknowledgement
-
-- [ ] Include motivation, why classic TSP is insufficient, and the new inputs, outputs and constraints.
-- [ ] Explain both meaningfully different approaches, their data structures, pseudocode, complexity, results, trade-offs, limitations and interesting findings.
-- [ ] Use consistent Approach A/B labels, following the mapping in section 2.
-- [ ] Upload the final slides separately, with team/member details and final experimental results. Verify slide/video playback before submission.
-- [ ] Acknowledge AI tools used, how/where they were used, which contributions are original, and **three actual representative prompts**. Include this documentation in the submission and acknowledge AI use in the slides. Section 11.3 refers to a project report although the deliverables list specifies code and slides; confirm the intended report format with the teaching team.
-- [ ] Ensure all team members can explain and defend the implementation and results.
-
-This README covers folder structure, prerequisites, execution, test cases, data provenance and packaging instructions. The unchecked items above must be completed before the submission as a whole meets the brief.
-
 ## 6. Troubleshooting
 
 | Symptom | Action |
